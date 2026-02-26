@@ -6,8 +6,12 @@ app = FastAPI()
 
 NG_URL = "https://audio.ngfiles.com"
 
-@app.get("/{song}")
+@app.get("/{song:path}")
 async def proxy_mp3(song: str):
+
+    if ".." in song:
+        raise HTTPException(status_code=400, detail="Invalid path")
+     
     target_url = f"{NG_URL}/{song}"
 
     async with httpx.AsyncClient(timeout=30.0) as client:
