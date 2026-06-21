@@ -6,7 +6,7 @@ app = FastAPI()
 
 NG_URL = "https://audio.ngfiles.com"
 CHUNK_SIZE = 64 * 1024
-
+MESSAGE = "ROBTOP PIDOR"
 
 @app.get("/{song:path}")
 async def proxy_mp3(song: str):
